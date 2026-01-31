@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 // ToDO: create exceptions handler
 
 @Slf4j
@@ -28,21 +30,21 @@ public class ProductController {
   }
 
   @PostMapping("/{id}")
-  public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestParam ProductUpdateRequest request) {
+  public ResponseEntity<ProductDto> update(@PathVariable UUID id, @RequestParam ProductUpdateRequest request) {
     var product = productServiceImpl.update(id, request);
     var dto = mapper.toDto(product);
     return ResponseEntity.ok(dto);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductDto> get(@PathVariable Long id) {
+  public ResponseEntity<ProductDto> get(@PathVariable UUID id) {
     var product = productServiceImpl.getById(id);
     var dto = mapper.toDto(product);
     return ResponseEntity.ok(dto);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity delete(@PathVariable Long id) {
+  public ResponseEntity delete(@PathVariable UUID id) {
     productServiceImpl.delete(id);
     return ResponseEntity.ok().build();
   }

@@ -3,18 +3,20 @@ package com.orymar.shopik.entity;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.UUID;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "product")
 @Builder
+@Table(name = "product")
 public class ProductEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
   private String name;
 

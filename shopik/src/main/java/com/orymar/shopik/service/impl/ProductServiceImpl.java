@@ -10,6 +10,8 @@ import com.orymar.shopik.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     return productRepo.save(product);
   }
 
-  public ProductEntity update(Long id, ProductUpdateRequest productUpdateRequest) {
+  public ProductEntity update(UUID id, ProductUpdateRequest productUpdateRequest) {
     var product = productRepo.findById(id).get();
     if (isNull(product)) throw new IllegalArgumentException("id is not exist");
     product.setPrice(productUpdateRequest.price());
@@ -33,14 +35,14 @@ public class ProductServiceImpl implements ProductService {
     return product;
   }
 
-  public ProductEntity getById(Long id) {
+  public ProductEntity getById(UUID id) {
     var product = productRepo.findById(id).get();
     if (isNull(product)) throw new IllegalArgumentException("id is not exist");
 
     return product;
   }
 
-  public void delete(Long id) {
+  public void delete(UUID id) {
     productRepo.deleteById(id);
   }
 }
